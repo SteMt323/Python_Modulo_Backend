@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://external-preview.redd.it/GdyvKY8y3bzT4RNNRUp7KN_2ORpNspKeYnj-dYwSRCA.jpg?width=640&crop=smart&auto=webp&s=ba9ca70bff1578937a13eac69451b163f05f02f8" height="400" alt="stats graph"  />
+</div>
+
 # Backend con Python y FastAPI
 
 Este repositorio contiene un proyecto de backend desarrollado en Python utilizando el framework FastAPI. A continuación, se detallan los pasos para configurar un servidor local con un entorno virtual.

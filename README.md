@@ -6,6 +6,17 @@
 
 Este repositorio contiene un proyecto de backend desarrollado en Python utilizando el framework FastAPI. A continuación, se detallan los pasos para configurar un servidor local con un entorno virtual.
 
+## Documentaciones
+
+Se presentara sitios con la documentación necesaria
+
+### FastApi Documentation 
+- [FastApi - Main Page](https://fastapi.tiangolo.com/)
+- [FastApi - Primeros Pasos](https://fastapi.tiangolo.com/es/tutorial/first-steps/)
+
+### HTTP status code
+- [Mozilla - Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
+
 ## Configuración del Entorno Virtual
 
 Para levantar el servidor local, se necesita crear y activar un entorno virtual. Sigue los pasos a continuación:

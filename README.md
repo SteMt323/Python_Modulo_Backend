@@ -13,6 +13,9 @@ Se presentara sitios con la documentación necesaria
 ### FastApi Documentation 
 - [FastApi - Main Page](https://fastapi.tiangolo.com/)
 - [FastApi - Primeros Pasos](https://fastapi.tiangolo.com/es/tutorial/first-steps/)
+#### AutoDocumentation APIS 
+- [Swagger](https://github.com/swagger-api/swagger-ui)
+- [ReDocs](https://github.com/Redocly/redoc)
 
 ### HTTP status code
 - [Mozilla - Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)

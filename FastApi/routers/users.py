@@ -1,7 +1,7 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-app = FastAPI()
+router = APIRouter(prefix="/user", tags=["user"], responses={404: {"message":"No encontrado"}})
 
 # Entidad User
 class User(BaseModel):
@@ -15,39 +15,43 @@ users_list = [User(id=1, name="Steven", alias="StvMt323", url="https://github.co
               User(id=2, name="Johaneris", alias="johaneris", url="https://github.com/johaneris", age=18)]
     
 
-# OPERACIONES GET
-@app.get('/usersjson') 
+# OPERACIONES GET d
+@router.get('/usersjson') 
 async def usersjson():
     return [{"id" : 1, "name" : "Steven", "alias" : "SteMt323", "url" : "https://github.com/SteMt323", "age" : 18},
             {"id" : 1, "name" : "Johaneris", "alias" : "johaneris", "url" : "https://github.com/johaneris", "age" : 18}]
 
-@app.get('/users') 
+@router.get('/') 
 async def users():
     return users_list
 
 # Petición por PATH
-@app.get('/user/{id}') 
+@router.get('/{id}') 
 async def user(id: int):
     return search_user(id)
     
 # Petición por QUERY
-@app.get('/user/') 
+@router.get('/', status_code=302) 
 async def user(id: int):
-    return search_user(id)
+    if type(search_user(id)) == User:
+        return search_user(id)
+    else:
+        raise HTTPException(status_code=404, detail="usuario no encontrado")
     
    
 # OPERACIONES POST
-@app.post('/user/')
+@router.post('/', response_model=User, status_code = 201)
 async def user(user: User):
     if type(search_user(user.id)) == User:
-        return {"error": "El usuario existe"}
+        raise HTTPException(status_code=404, detail="El usuario existe")
+    # Para lanzar una excepcion "http status code" se usa la palabra reservada "raise"
     else:
         users_list.append(user)
         return user
     
-    
-# OPERACIONES PUT
-@app.put('/user/')
+
+# OPERACIONES PUT s
+@router.put('/', status_code=201)
 async def user(user: User):
     found = False
     
@@ -57,11 +61,12 @@ async def user(user: User):
             found = True
         
     if not found:
-        return {"error": "No se ha actualizado al usuario"}
+        raise HTTPException(status_code=304, detail="No se ha modificado el usuario")
     else:
         return user
 
-@app.delete('/user/{id}') 
+# OPERACIONES DELETE
+@router.delete('/{id}', status_code=201) 
 async def user(id: int):   
     found = False
     for index, save_user in enumerate(users_list):
@@ -69,10 +74,9 @@ async def user(id: int):
             del users_list[index]
             found = True
             
+            
     if not found:
-        return {"error": "No se ha actualizado al usuario"}
-    else:
-        return {"success":"Se ha eliminado el usuario exitosamente"}
+        raise HTTPException(status_code=404, detail="No se ha encontrado el usuario")
             
     
    
@@ -82,5 +86,5 @@ def search_user(id: int):
     try:
         return list(user)[0]
     except:
-        return {"error": "No se ha encontrado al usuario"}
+        return "usuario no encontrado"
     

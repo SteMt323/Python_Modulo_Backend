@@ -61,6 +61,20 @@ async def user(user: User):
     else:
         return user
 
+@app.delete('/user/{id}') 
+async def user(id: int):   
+    found = False
+    for index, save_user in enumerate(users_list):
+        if save_user.id == id:
+            del users_list[index]
+            found = True
+            
+    if not found:
+        return {"error": "No se ha actualizado al usuario"}
+    else:
+        return {"success":"Se ha eliminado el usuario exitosamente"}
+            
+    
    
 # Función para buscar usuario 
 def search_user(id: int):
